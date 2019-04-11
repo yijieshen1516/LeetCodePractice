@@ -20,6 +20,14 @@ def partition(array, low, up):
 
     return j
 
+# quick sort implementation details
+# 1. the partition function is to find the correct index of pivot value. 
+#    pivot value can be the first element of list
+#    left array should be smaller than pivot value
+#    right array should be larger than pivot value
+# 2. recursive call partition function as left half and right half array
+# 3. divide and concur to call main sort function
+
 array = [48, 44, 19, 59, 72, 80, 42, 65, 82, 8, 95, 68]
 low = 0
 up = len(array) -1

@@ -11,6 +11,22 @@ class Solution(object):
                 graph[email].add(acc[1])
                 em_to_name[email] = name
 
+        visited = set()
+        ans = []
+        for email in graph:
+            if email not in visited:
+                visited.add(email)
+                stack = [email]
+                component = []
+                while stack:
+                    node = stack.pop()
+                    component.append(node)
+
+
+
+
+        return graph
+
 
 accounts = [["John", "johnsmith@mail.com", "john00@mail.com"], ["John", "johnnybravo@mail.com"], ["John", "johnsmith@mail.com", "john_newyork@mail.com"], ["Mary", "mary@mail.com"]]
 print(Solution().accountsMerge(accounts))

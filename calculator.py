@@ -27,7 +27,7 @@ class Solution(object):
                 pre_op = c
         return sum(stack)
 
-s = '3+2*2'
+s = '3-2*3'
 
 print(Solution().calculate(s))
 

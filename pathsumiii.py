@@ -1,4 +1,6 @@
 # Definition for a binary tree node.
+import collections
+
 class TreeNode(object):
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -13,28 +15,22 @@ class Solution(object):
         :type sum: int
         :rtype: int
         """
-        if not root:
-            return 0
+        self.ans = 0
+        cache = collections.defaultdict(int)
+        cache[0] = 1
 
-        return self.helper(root, sum) + self.pathSum(root.left, sum) + self.pathSum(root.right, sum)
+        def dfs(root, cur_sum):
+            if not root:
+                return
+            cur_sum += root.val
+            self.ans += cache[cur_sum - sum]
+            cache[cur_sum] += 1
+            dfs(root.left, cur_sum)
+            dfs(root.right, cur_sum)
+            cache[cur_sum] -= 1
 
-    def helper(self, root, sum):
-
-        count = 0
-
-        if not root:
-            return 0
-
-        sum -= root.val
-
-        if sum == 0:
-            count += 1
-
-        count += self.helper(root.left, sum)
-        count += self.helper(root.right, sum)
-
-        return count
-
+        dfs(root, 0)
+        return self.ans
 
 sum = 8
 root = TreeNode(10)
@@ -48,3 +44,26 @@ root.left.right.right = TreeNode(1)
 root.right.right = TreeNode(11)
 
 print(Solution().pathSum(root, sum))
+
+
+# if not root:
+#     return 0
+#
+# return self.helper(root, sum) + self.pathSum(root.left, sum) + self.pathSum(root.right, sum)
+#
+# def helper(self, root, sum):
+#
+#     count = 0
+#
+#     if not root:
+#         return 0
+#
+#     sum -= root.val
+#
+#     if sum == 0:
+#         count += 1
+#
+#     count += self.helper(root.left, sum)
+#     count += self.helper(root.right, sum)
+#
+#     return count

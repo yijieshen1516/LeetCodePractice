@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 class Solution():
 
     def findOrder(self, n, prerequisities):
@@ -23,6 +25,7 @@ class Solution():
 
 n = 4
 prerequisities = [[1,0],[2,0],[3,1],[3,2]]
-
+#n = 2
+#prerequisities = [[0, 1], [1, 0]]
 print(Solution().findOrder(n, prerequisities))
 

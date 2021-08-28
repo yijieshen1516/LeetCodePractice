@@ -1,35 +1,83 @@
+from collections import defaultdict
+
+
 class Solution(object):
     def findItinerary(self, tickets):
         """
         :type tickets: List[List[str]]
         :rtype: List[str]
         """
-        from collections import defaultdict
-        self.flightMap = defaultdict(list)
+
+        """"
+        graph backtracking problem
+        """
+
+        self.graph = defaultdict(list)
 
         for ticket in tickets:
-            start, end = ticket[0], ticket[1]
-            self.flightMap[start].append(end)
+            self.graph[ticket[0]].append(ticket[1])
 
-        for origin, itin in self.flightMap.items():
-            itin.sort()
+        self.length = len(tickets)
+        self.visited = defaultdict(list)
 
-        startName = 'JFK'
-        self.res = []
-        self.helper(startName)
+        for origin, ticket in self.graph.items():
+            ticket.sort()
+            self.visited[origin] = [False]* len(ticket)
 
-        return self.res
+        route = ['JFK']
+        self.results = []
 
-    def helper(self, startName):
-        itin = self.flightMap[startName]
+        self.helper('JFK', route)
+
+        return self.results
 
 
-        while itin:
-            name = itin[0]
-            itin.pop(0)
-            self.helper(name)
+    def helper(self, node, route):
 
-        self.res.append(startName)
+        if len(route) == self.length +1:
+            self.results = route[:]
+            return True
+
+        for idx, nei in enumerate(self.graph[node]):
+            if not self.visited[node][idx]:
+                self.visited[node][idx] = True
+                route.append(nei)
+                found = self.helper(nei, route)
+                if found:
+                    return found
+                route.pop()
+                self.visited[node][idx] = False
+
 
 tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
+#tickets = [["JFK","KUL"],["JFK","NRT"],["NRT","JFK"]]
 print(Solution().findItinerary(tickets))
+
+
+
+# from collections import defaultdict
+# self.flightMap = defaultdict(list)
+#
+# for ticket in tickets:
+#     start, end = ticket[0], ticket[1]
+#     self.flightMap[start].append(end)
+#
+# for origin, itin in self.flightMap.items():
+#     itin.sort()
+#
+# startName = 'JFK'
+# self.res = []
+# self.helper(startName)
+#
+# return self.res
+#
+# def helper(self, startName):
+#     itin = self.flightMap[startName]
+#
+#
+#     while itin:
+#         name = itin[0]
+#         itin.pop(0)
+#         self.helper(name)
+#
+#     self.res.append(startName)

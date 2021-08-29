@@ -10,6 +10,7 @@ class Solution(object):
 
         """"
         graph backtracking problem
+        backtracking only needs one answer, so stopped after getting one answer
         """
 
         self.graph = defaultdict(list)
@@ -30,7 +31,6 @@ class Solution(object):
         self.helper('JFK', route)
 
         return self.results
-
 
     def helper(self, node, route):
 

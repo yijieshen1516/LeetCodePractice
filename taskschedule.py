@@ -12,16 +12,12 @@ class Solution:
             heappush(h, (-1*v, k))
         while h:
             i, temp = 0, []
-            while i <= n:
-                curr_time += 1
+            for _ in range(n):
                 if h:
                     x,y = heappop(h)
+                    curr_time += 1
                     if x != -1:
                         temp.append((x+1,y))
-                if not h and not temp:
-                    break
-                else:
-                    i += 1
             for item in temp:
                 heappush(h, item)
         return curr_time

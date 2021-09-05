@@ -5,14 +5,13 @@ class Solution():
 
         for i in range(len(grid)):
             for j in range(len(grid[0])):
-                if grid[i][j] == 1:
-                    start_i = i
-                    start_j = j
-                    self.island = set()
-                    self.helper(grid, i, j, start_i, start_j)
 
-                if self.island not in islands:
-                    islands.add(tuple(self.island))
+                if grid[i][j] == 1:
+                    self.island = set()
+                    self.helper(grid, i, j, i, j)
+
+                    if self.island not in islands:
+                        islands.add(tuple(self.island))
 
         return len(islands)
 
@@ -29,6 +28,7 @@ class Solution():
         self.helper(grid, i-1, j, start_i, start_j)
         self.helper(grid, i, j+1, start_i, start_j)
         self.helper(grid, i, j-1, start_i, start_j)
+
 
 grid = [
     [1, 1, 0, 0, 0],

@@ -7,28 +7,36 @@ class Solution(object):
         """
         for m in range(len(board)):
             for n in range(len(board[0])):
-                if self.helper(board, word, m, n, 0):
-                    return True
+                if board[m][n] == word[0]:
+                    if self.dfs(board, m, n, 0, word):
+                        return True
 
         return False
 
-    def helper(self, board, word, i, j, d):
-
-        if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]) or word[d] != board[i][j]:
-            return False
-
-        if d == len(word) - 1:
+    def dfs(self,board,i,j,idx,word):
+        if idx==len(word):
             return True
 
-        cur = board[i][j]
-        board[i][j] = 0
-        ans = self.helper(board, word, i+1, j, d+1) or self.helper(board, word, i-1, j, d+1) or self.helper(board, word, i, j+1, d+1) or self.helper(board, word, i, j-1, d+1)
+        if i< 0 or i > len(board)-1 or j < 0 or j > len(board[0])-1 or board[i][j]!=word[idx]:
+            return False
 
-        board[i][j] = cur
+        original=board[i][j]
+        board[i][j]=""
 
-        return ans
+        if self.dfs(board,i-1,j,idx+1,word) or self.dfs(board,i+1,j,idx+1,word) or self.dfs(board,i,j-1,idx+1,word) or self.dfs(board,i,j+1,idx+1,word):
+            return True
+        else:
+
+            board[i][j]=original
 
 
-board = [['A', 'B', 'C', 'E'], ['S', 'F', 'C', 'S'], ['A', 'D', 'E', 'E']]
-word = 'ABCCED'
+#board = [['A', 'B', 'C', 'E'], ['S', 'F', 'C', 'S'], ['A', 'D', 'E', 'E']]
+#word = 'ABCCED'
+
+board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+word = "ABCB"
+
+#board = [["a"]]
+#word = "a"
+
 print(Solution().exist(board, word))

@@ -5,31 +5,53 @@ class Solution:
 
     def findCheapestPrice(self, n, flights, src, dst, K):
 
-        adj_list = collections.defaultdict(list)
-        for u, v, w in flights:
-            adj_list[u].append((v,w))
+        # adj_list = collections.defaultdict(list)
+        # for u, v, w in flights:
+        #     adj_list[u].append((v,w))
+        #
+        # best_visited = collections.defaultdict(lambda : 'Inf')
+        #
+        # prior_queue = [ (0, -1, src) ] #weight, steps, node
+        #
+        # while prior_queue:
+        #     cost, steps, node = heapq.heappop(prior_queue)
+        #
+        #     if best_visited[node] <= steps:
+        #         continue
+        #
+        #     if steps>K:  # More than k stops, invalid
+        #         continue
+        #
+        #     if node==dst:
+        #         return cost
+        #
+        #     best_visited[node] = steps #Update steps
+        #
+        #     for neighb, weight in adj_list[node]:
+        #         if steps + 1 < best_visited[neighb]: #Push neighb into the heap, only if steps+1 is
+        #             heapq.heappush(prior_queue, (cost+weight, steps + 1, neighb))
+        #
+        # return -1
 
-        best_visited = collections.defaultdict(lambda : 'Inf')
+        graph = collections.defaultdict(dict)
 
-        prior_queue = [ (0, -1, src) ] #weight, steps, node
+        for s, d, w in flights:
+            graph[s][d] = w
 
-        while prior_queue:
-            cost, steps, node = heapq.heappop(prior_queue)
+        pq = [(0, src, K+1)]
 
-            if best_visited[node] <= steps:
+        vis = [0] * n
+
+        while pq:
+            w, x, k = heapq.heappop(pq)
+
+            if x == dst:
+                return w
+            if vis[x] >= k:
                 continue
-
-            if steps>K:  # More than k stops, invalid
-                continue
-
-            if node==dst:
-                return cost
-
-            best_visited[node] = steps #Update steps
-
-            for neighb, weight in adj_list[node]:
-                if steps + 1 < best_visited[neighb]: #Push neighb into the heap, only if steps+1 is
-                    heapq.heappush(prior_queue, (cost+weight, steps + 1, neighb))
+            vis[x] = k
+            for y, dw in graph[x].items():
+                heapq.heappush(pq, (w+dw, y, k-1))
 
         return -1
 

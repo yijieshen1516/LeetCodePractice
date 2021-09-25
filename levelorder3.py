@@ -41,27 +41,49 @@ class Solution(object):
         #             line = []
         #             tmp = []
 
-        queue = [(root, 0)]
+        # queue = [(root, 0)]
+        # res = []
+        # while queue:
+        #
+        #     node, level = queue.pop(0)
+        #     if len(res) < level+1:
+        #         res.append([])
+        #
+        #     if level %2 == 1:
+        #         res[level].insert(0, node.val)
+        #     else:
+        #         res[level].append(node.val)
+        #
+        #     if node.left:
+        #         queue.append((node.left, level+1))
+        #     if node.right:
+        #         queue.append((node.right, level+1))
+        #
+        # return res
+
+        from collections import defaultdict
+
         res = []
-        while queue:
+        self.nodeMap = defaultdict(list)
 
-            node, level = queue.pop(0)
-            if len(res) < level+1:
-                res.append([])
+        self.dfs(root, 0)
 
-            if level %2 == 1:
-                res[level].insert(0, node.val)
-            else:
-                res[level].append(node.val)
-
-            if node.left:
-                queue.append((node.left, level+1))
-            if node.right:
-                queue.append((node.right, level+1))
-
-
+        for value in self.nodeMap.values():
+            res.extend(value)
 
         return res
+
+    def dfs(self, node, level):
+
+        if not node:
+            self.nodeMap[level].append(None)
+            return
+
+        self.nodeMap[level].append(node.val)
+
+        self.dfs(node.left, level+1)
+        self.dfs(node.right, level+1)
+
 
 
 root = None

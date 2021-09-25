@@ -4,6 +4,9 @@ class Solution(object):
 
     def largestIsland(self, grid):
 
+        #look through 
+
+
         island_tag = 100
         area = collections.Counter()
         directions = [(0, -1), (-1, 0), (0, 1), (1, 0)]

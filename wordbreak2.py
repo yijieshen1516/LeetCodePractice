@@ -12,7 +12,6 @@ class Solution(object):
 
         return self.helper(s, wordDict, mem)
 
-
     def helper(self, s, wordDict, mem):
 
         if not s:
@@ -29,16 +28,16 @@ class Solution(object):
             left = s[:idx]
             right = s[idx:]
 
-            if right in wordDict:
-                res = self.helper(left, wordDict, mem)
+            if left in wordDict:
+                res = self.helper(right, wordDict, mem)
                 for ss in res:
-                    mem[s].append(right + 'and' + ss)
-
+                    mem[s].append(left + ' ' + ss)
 
         return mem[s]
 
 
-s = "catsanddog"
-wordDict = ["cat", "cats", "and", "sand", "dog"]
-
+#s = "catsanddog"
+#wordDict = ["cat", "cats", "and", "sand", "dog"]
+s = "pineapplepenapple"
+wordDict = ["apple", "pen", "applepen", "pine", "pineapple"]
 print(Solution().wordBreak(s, wordDict))

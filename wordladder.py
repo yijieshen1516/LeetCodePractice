@@ -37,7 +37,7 @@ class Solution(object):
 
 
         queue = [(beginWord, 1)]
-        wordList = set(wordList)
+        wordList = set(wordList) # here set in time is o(1), in list time is o(n)
         while queue:
 
             word, length = queue.pop(0)

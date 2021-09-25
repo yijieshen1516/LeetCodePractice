@@ -33,8 +33,8 @@ class Solution(object):
                 tmp_word = word[:idx] + "*" + word[idx+1:]
                 for middle_word in all_combo_dict[tmp_word]:
                     if middle_word == endWord:
-                        res.append(path + [endWord])
-
+                        path.append(endWord)
+                        res.append(path[:])
                     elif middle_word not in visited:
                         visited.add(middle_word)
                         queue.append((middle_word, path + [middle_word]))

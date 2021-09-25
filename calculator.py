@@ -1,33 +1,34 @@
-import math
-
 class Solution(object):
     def calculate(self, s):
-        num = 0
-        res = 0
-        pre_op = '+'
-        s += '+'
         stack = []
-        for c in s:
-            if c.isdigit():
-                num = num * 10 + int(c)
-            elif c == ' ':
-                pass
+        num = 0
+        sign = '+'
+        s += '+'
+
+        for ch in s:
+            if ch.isdigit():
+                num = num*10 + int(ch)
+            elif ch == ' ':
+                continue
             else:
-                if pre_op == '+':
+                if sign == '+':
                     stack.append(num)
-                elif pre_op == '-':
+                elif sign == '-':
                     stack.append(-num)
-                elif pre_op == '*':
-                    operant = stack.pop()
-                    stack.append((operant * num))
-                elif pre_op == '/':
-                    operant = stack.pop()
-                    stack.append(math.trunc(operant / num))
+                elif sign == '*':
+                    tmp = stack.pop()*num
+                    stack.append(tmp)
+                elif sign == '/':
+                    tmp1 = stack.pop()
+                    tmp = float(tmp1)/num
+                    stack.append(int(tmp))
+
                 num = 0
-                pre_op = c
+                sign = ch
+
         return sum(stack)
-
-s = '3-2*3'
-
+#s = '3-2*3'
+#s = '42'
+s = '14-3/2'
 print(Solution().calculate(s))
 

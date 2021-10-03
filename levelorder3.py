@@ -61,30 +61,49 @@ class Solution(object):
         #
         # return res
 
-        from collections import defaultdict
+    #     from collections import defaultdict
+    #
+    #     res = []
+    #     self.nodeMap = defaultdict(list)
+    #
+    #     self.dfs(root, 0)
+    #
+    #     for value in self.nodeMap.values():
+    #         res.extend(value)
+    #
+    #     return res
+    #
+    # def dfs(self, node, level):
+    #
+    #     if not node:
+    #         self.nodeMap[level].append(None)
+    #         return
+    #
+    #     self.nodeMap[level].append(node.val)
+    #
+    #     self.dfs(node.left, level+1)
+    #     self.dfs(node.right, level+1)
 
+        pos = 0
+        queue = [(root, 0)]
         res = []
-        self.nodeMap = defaultdict(list)
 
-        self.dfs(root, 0)
+        while queue:
 
-        for value in self.nodeMap.values():
-            res.extend(value)
+            curr = []
+
+            for _ in range(len(queue)):
+                node, pos = queue.pop(0)
+                curr.append((node.val, pos))
+
+                if node.left:
+                    queue.append((node.left, pos*2))
+                if node.right:
+                    queue.append((node.right, pos*2+1))
+
+            res.append(curr)
 
         return res
-
-    def dfs(self, node, level):
-
-        if not node:
-            self.nodeMap[level].append(None)
-            return
-
-        self.nodeMap[level].append(node.val)
-
-        self.dfs(node.left, level+1)
-        self.dfs(node.right, level+1)
-
-
 
 root = None
 root = newNode(4)

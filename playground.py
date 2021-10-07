@@ -206,30 +206,54 @@ import math
 #         ans[milestoneMap[milestones[i]]] = day
 #
 #     return ans
-import bisect
+# import bisect
+#
+# def waysToSplit(nums):
+#     """
+#     :type nums: List[int]
+#     :rtype: int
+#     """
+#     prefix = [0] * len(nums)
+#     prefixSum = 0
+#
+#     for idx, num in enumerate(nums):
+#         prefixSum += num
+#         prefix[idx] = prefixSum
+#
+#     ans = 0
+#
+#     for i in range(0, len(nums)):
+#         j = bisect.bisect_left(prefix, 2*prefix[i])
+#         k = bisect.bisect_right(prefix, (prefix[i] + prefix[-1])//2)
+#         ans += max(0, min(len(nums), k) - max(i+1, j))
+#         print(ans)
+#     return ans % (10**9+7)
+#
+# #nums = [1, 1, 1]
+# #print(waysToSplit(nums))
+# nums = [1, 2, 2, 2, 5, 0]
+# print(waysToSplit(nums))
+#
+# def badNumberes(arr, lower, upper):
+#
+#     maxlength = 0
+#     arr.sort()
+#     for idx in range(len(arr)):
+#         length = 0
+#         if idx == 0 and arr[idx] >= lower:
+#             length = arr[idx] - lower
+#         elif idx >= 1 and arr[idx] >= lower:
+#             length = arr[idx] - max(lower, arr[idx-1]+1)
+#         elif arr[idx] < upper:
+#             length = max(0, min(arr[idx], upper) - arr[idx-1])
+#
+#         maxlength = max(maxlength, length)
+#
+#     return maxlength
+#
+#
+# arr = [37, 7, 22, 15, 49, 60]
+# lower = 3
+# upper = 48
+# print(badNumberes(arr, lower, upper))
 
-def waysToSplit(nums):
-    """
-    :type nums: List[int]
-    :rtype: int
-    """
-    prefix = [0] * len(nums)
-    prefixSum = 0
-
-    for idx, num in enumerate(nums):
-        prefixSum += num
-        prefix[idx] = prefixSum
-
-    ans = 0
-
-    for i in range(0, len(nums)):
-        j = bisect.bisect_left(prefix, 2*prefix[i])
-        k = bisect.bisect_right(prefix, (prefix[i] + prefix[-1])//2)
-        ans += max(0, min(len(nums), k) - max(i+1, j))
-        print(ans)
-    return ans % (10**9+7)
-
-#nums = [1, 1, 1]
-#print(waysToSplit(nums))
-nums = [1, 2, 2, 2, 5, 0]
-print(waysToSplit(nums))

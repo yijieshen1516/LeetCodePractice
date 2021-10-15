@@ -257,3 +257,103 @@ import math
 # upper = 48
 # print(badNumberes(arr, lower, upper))
 
+# arr = [1, 2, 1, 3, 4, 3, 2]
+# result = arr[0]
+# for idx in range(1, len(arr)):
+#     result ^= arr[idx]
+# print(result)
+
+# str = "abbbaaca"
+#
+# def remove(str):
+#     if not str or len(str) < 1:
+#         return
+#
+#     stack = []
+#     fast = 0
+#
+#     while fast < len(str):
+#         c = str[fast]
+#         if len(stack) > 0 and str[fast] == stack[-1]:
+#             while fast < len(str) and c == str[fast]:
+#                 fast += 1
+#             stack.pop()
+#         else:
+#             stack.append(str[fast])
+#             fast += 1
+#     return "".join(stack)
+#
+# print(remove(str))
+
+# def findKthPositive(arr, k):
+#     """
+#     :type arr: List[int]
+#     :type k: int
+#     :rtype: int
+#     """
+#     left = 0
+#     right = len(arr) - 1
+#
+#     while left <= right:
+#         mid = (left+right)//2
+#         missing = arr[mid] - mid -1
+#
+#         if missing < k:
+#             left = mid + 1
+#
+#         else:
+#             right = mid - 1
+#
+#     return right + k +1
+#
+# arr = [2, 3, 4, 7, 11]
+# k = 5
+#
+# print(findKthPositive(arr, k))
+# import random
+#
+# def findKthLargest(nums, k):
+#     """
+#     kth largest element using k size min heap
+#     """
+#
+#     def partition(left, right, pivot_index):
+#
+#         pivot = nums[pivot_index]
+#         nums[pivot_index], nums[right] = nums[right], nums[pivot_index]
+#
+#         store_index = left
+#         for i in range(left, right):
+#             if nums[i] < pivot:
+#                 nums[store_index], nums[i] = nums[i], nums[store_index]
+#                 store_index += 1
+#         nums[right], nums[store_index] = nums[store_index], nums[right]
+#
+#         return store_index
+#
+#     def select(left, right, k_smallest):
+#
+#         if left == right:
+#             return nums[left]
+#
+#         pivot_index = random.randint(left, right)
+#
+#         pivot_index = partition(left, right, pivot_index)
+#
+#         if k_smallest == pivot_index:
+#             return nums[k_smallest]
+#         elif k_smallest < pivot_index:
+#             return select(left, pivot_index-1, k_smallest)
+#         else:
+#             return select(pivot_index+1, right, k_smallest)
+#
+#     return select(0, len(nums)-1, len(nums)-k)
+#
+#
+# nums = [3, 2, 1, 5, 6, 4]
+# k = 2
+# print(findKthLargest(nums, k))
+
+
+
+

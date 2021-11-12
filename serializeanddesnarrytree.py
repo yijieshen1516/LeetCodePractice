@@ -36,6 +36,7 @@ class Codec:
                 else:
                     self.data.append(None)
 
+        print(self.data)
         return self.data
 
     def deserialize(self, data):

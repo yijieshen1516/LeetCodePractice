@@ -310,7 +310,7 @@ import math
 # k = 5
 #
 # print(findKthPositive(arr, k))
-# import random
+import random
 #
 # def findKthLargest(nums, k):
 #     """
@@ -336,7 +336,8 @@ import math
 #         if left == right:
 #             return nums[left]
 #
-#         pivot_index = random.randint(left, right)
+#         #pivot_index = random.randint(left, right)
+#         pivot_index = 1
 #
 #         pivot_index = partition(left, right, pivot_index)
 #
@@ -348,12 +349,100 @@ import math
 #             return select(pivot_index+1, right, k_smallest)
 #
 #     return select(0, len(nums)-1, len(nums)-k)
-#
-#
+# #
+# #
 # nums = [3, 2, 1, 5, 6, 4]
 # k = 2
 # print(findKthLargest(nums, k))
+#
+# def removeDuplicates(s):
+#     """
+#     :type s: str
+#     :type k: int
+#     :rtype: str
+#     """
+#
+#     stack = [['#', 0]]
+#
+#
+#     for ch in s:
+#
+#         if stack[-1][0] == ch:
+#             stack[-1][1] += 1
+#             if stack[-1][1] > 1:
+#                 stack.pop()
+#
+#         else:
+#             stack.append([ch, 1])
+#
+#     return ''.join([c*k for c, k in stack])
+#
+# s = 'abbabba'
+# print(removeDuplicates(s))
 
+# class Solution(object):
+#     def kthSmallest(self, matrix, k):
+#
+#         n = len(matrix)
+#
+#         start = matrix[0][0]
+#         end = matrix[n-1][n-1]
+#
+#         while start < end:
+#             mid = (start+end)/2
+#             smaller = matrix[0][0]
+#             larger = matrix[n-1][n-1]
+#
+#             count, smaller, larger = self.countLessEqual(matrix, mid, smaller, larger)
+#
+#             if count == k:
+#                 return smaller
+#             if count < k:
+#                 start = larger
+#             else:
+#                 end = smaller
+#
+#         return start
+#
+#     def countLessEqual(self, matrix, mid, smaller, larger):
+#
+#         count = 0
+#         n = len(matrix)
+#         row = n-1
+#         col = 0
+#
+#         while row >= 0 and col < n:
+#             if matrix[row][col] > mid:
+#                 larger = min(larger, matrix[row][col])
+#                 row -= 1
+#
+#             else:
+#                 smaller = max(smaller, matrix[row][col])
+#                 count += row+1
+#                 col += 1
+#
+#         return count, smaller, larger
+#
+#
+# matrix = [[1, 5, 9], [10, 11, 13], [12, 13, 15]]
+# k = 8
+#
+# print(Solution().kthSmallest(matrix, k))
+
+from enum import Enum
+
+class Animal(Enum):
+    DOG =1
+    PIG =2
+
+class Solution():
+    def __init__(self):
+        self.val = Animal.DOG
+
+    def run(self):
+        print(self.val)
+
+Solution().run()
 
 
 

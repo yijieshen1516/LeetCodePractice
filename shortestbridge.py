@@ -24,7 +24,7 @@ class Solution(object):
             level = []
 
             for s in range(size):
-                i, j = stack.pop()
+                i, j = stack.pop(0)
 
                 for move in self.moves:
                     newI = i + move[0]
@@ -37,11 +37,11 @@ class Solution(object):
                         return ans
 
                     seen.add((newI, newJ))
-                    level.append((newI, newJ))
+                    #level.append((newI, newJ))
+                    stack.append((newI, newJ))
 
             ans += 1
-            stack = level
-
+            #stack = level
         return -1
 
     def dfs(self, n, m, i, j, stack, grid, seen):
@@ -56,5 +56,6 @@ class Solution(object):
 
 
 
-grid = [[0, 1], [1, 0]]
+#grid = [[0, 1], [1, 0]]
+grid = [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 0, 1, 0, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]]
 print(Solution().shortestBridge(grid))

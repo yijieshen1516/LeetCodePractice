@@ -6,26 +6,34 @@ class Solution(object):
         :rtype: int
         """
 
-        dp = {}
-        return self.helper(nums, S, dp, 0)
+        N = len(nums)
 
+        if not N:
+            return 0
 
-    def helper(self, nums, S, dp, i):
+        memo = {}
 
-        if i == len(nums):
-            if S == 0:
-                return 1
-            else:
-                return 0
-        else:
-            if S in dp:
-                return dp[S]
+        def helper(index, k):
 
-            left = self.helper(nums, S - nums[i], dp, i + 1)
-            right = self.helper(nums, S + nums[i], dp, i + 1)
+            if index == N:
+                if S == k:
+                    return 1
+                else:
+                    return 0
 
-            dp[S] = left + right
-            return dp[S]
+            key = (index, k)
+
+            if key in memo:
+                return memo[key]
+
+            memo[key] = 0
+
+            for candidate in [nums[index], -nums[index]]:
+                memo[key] += helper(index+1, k+candidate)
+
+            return memo[key]
+
+        return helper(0, 0)
 
 nums = [1, 1, 1, 1, 1]
 S = 3

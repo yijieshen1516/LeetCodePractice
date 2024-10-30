@@ -15,11 +15,11 @@ class Solution(object):
         :rtype: TreeNode
         """
 
-        if root and (root is p or root is q):
-            return root
-
         if not root:
             return None
+
+        if root is p or root is q:
+            return root
 
         left = self.lowestCommonAncestor(root.left, p, q)
         right = self.lowestCommonAncestor(root.right, p, q)
@@ -37,5 +37,16 @@ class Solution(object):
             return None
 
 
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+p = TreeNode(5)
+q = TreeNode(1)
+
+print(Solution().lowestCommonAncestor(root, p, q))
 
 

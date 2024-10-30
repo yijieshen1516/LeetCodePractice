@@ -49,8 +49,8 @@ class Solution(object):
                 self.visited[node][idx] = False
 
 
-tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
-#tickets = [["JFK","KUL"],["JFK","NRT"],["NRT","JFK"]]
+#tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
+tickets = [["JFK","KUL"],["JFK","NRT"],["NRT","JFK"]]
 print(Solution().findItinerary(tickets))
 
 

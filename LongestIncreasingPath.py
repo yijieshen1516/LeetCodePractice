@@ -32,5 +32,5 @@ class Solution(object):
         return mem[i][j]
 
 
-matrix = [[1, 2]]
+matrix = [[9,9,4],[6,6,8],[2,1,1]]
 print(Solution().longestIncreasingPath(matrix))
